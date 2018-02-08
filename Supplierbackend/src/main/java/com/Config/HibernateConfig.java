@@ -8,14 +8,18 @@ import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 
+import com.DaoImpl.SupplierDaoImpl;
 
 
+@ComponentScan("com.*")
 public class HibernateConfig {
 
+	
 	@Bean(name="datasource")
 	public DataSource getH2Data()
 	{
@@ -38,12 +42,15 @@ public class HibernateConfig {
 		return p;
 	}
 	@Bean(name="sessionFactory")
-	@Autowired
+	
 	public SessionFactory getSessionFac(DataSource datasource)
 	{
 		LocalSessionFactoryBuilder sb=new LocalSessionFactoryBuilder(datasource);
 		sb.addProperties(getHiberProp());
 		sb.addAnnotatedClass(com.Model.Supplier.class);
+		sb.addAnnotatedClass(com.Model.Category.class);
+		sb.addAnnotatedClass(com.Model.Product.class);
+		sb.addAnnotatedClass(com.Model.User.class);
 		return sb.buildSessionFactory();
 	}
 	@Bean(name="transactionManager")

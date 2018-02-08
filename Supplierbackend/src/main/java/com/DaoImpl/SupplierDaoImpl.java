@@ -1,5 +1,7 @@
 package com.DaoImpl;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.hibernate.Session;
@@ -73,6 +75,14 @@ public class SupplierDaoImpl implements SupplierDao{
 	public Supplier get(String sid) {
 		Supplier sup=session.get(Supplier.class, sid);
 		return sup;
+	}
+	public Supplier getSupp(String s) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public List listSupp() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

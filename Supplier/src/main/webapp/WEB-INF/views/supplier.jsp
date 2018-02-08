@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import= "com.Model.Supplier"%>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    <%@ page import="com.Model.Supplier" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,11 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- header -->
-<%@include file="./shared/header.jsp" %>
-
 <form:form action="AddSupplier" modelAttribute="supplier">
-
 <table align="center" cellspacing="2">
 	<tr>
 		<td colspan="2">SUPPLIER DETAILS</td>
@@ -33,16 +29,5 @@
 	
 	</table>
 	</form:form>
-	<table cellspacing="2" align="center">
-
-		<td>
-			
-			<a href="UpdateSupplier/{supplier.sid}"/>UPDATE</a>
-		</td>
-	</tr>
-
-</table>
-	<!-- footer -->
-<%@include file="./shared/footer.jsp" %>
 </body>
 </html>

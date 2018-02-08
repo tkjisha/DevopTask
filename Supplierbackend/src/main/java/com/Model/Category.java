@@ -1,8 +1,13 @@
 package com.Model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -19,7 +24,15 @@ public class Category {
 	@Column(name="catname")
 	private String catName;
 	
+	@OneToMany(targetEntity=Product.class,fetch=FetchType.EAGER,mappedBy="category")
+	private Set<Product> products=new HashSet<Product>(0);
 	
+	public Set<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 	public String getCatId() {
 		return catId;
 	}
