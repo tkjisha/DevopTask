@@ -9,16 +9,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form:form action="AddSupplier" modelAttribute="supplier">
-<table align="center" cellspacing="2">
+<jsp:include page="adminadd.jsp"></jsp:include>
+<form action="AddSupplier" method="post">
+<table align="center" cellspacing="3" cellpadding="4">
 	<tr>
 		<td colspan="2">SUPPLIER DETAILS</td>
 	</tr>	
 	<tr>
-		<td>Supplier ID</td><td><form:input path="sid"/></td>		
+		<td>Supplier ID</td><td><input type="text" name="sid"/></td>		
 	</tr>
 	<tr>
-		<td>Supplier Name</td><td><form:input path="supplierName"/></td>		
+		<td>Supplier Name</td><td><input type="text" name="supName"/></td>		
 	</tr>
 	<tr>
 		<td col span="2">
@@ -28,6 +29,6 @@
 	</tr>
 	
 	</table>
-	</form:form>
+	</form>
 </body>
 </html>

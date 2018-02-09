@@ -1,7 +1,11 @@
 package com.DaoImpl;
 
+import java.util.List;
+
+
 import javax.sql.DataSource;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +18,9 @@ import com.Config.HibernateConfig;
 import com.DAO.CategoryDao;
 import com.Model.Category;
 
-@Repository("catDaoImpl")
+import javassist.bytecode.Descriptor.Iterator;
+
+@Repository("categoryDaoImpl")
 @Service
 public class CategoryDaoImpl implements CategoryDao{
 
@@ -59,6 +65,14 @@ public class CategoryDaoImpl implements CategoryDao{
 	public Category getById() {
 		
 		return null;
+	}
+	@Override
+	public List<Category> retrieveCategory() {
+		session.beginTransaction();
+		List<Category> catList=session.createQuery("from Category").list();
+		session.getTransaction().commit();
+		
+		return catList;
 	}
 
 }

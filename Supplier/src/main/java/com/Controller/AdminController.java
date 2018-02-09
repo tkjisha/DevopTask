@@ -1,59 +1,135 @@
 package com.Controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.DaoImpl.CategoryDaoImpl;
+import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
+import com.Model.Category;
+import com.Model.Product;
 import com.Model.Supplier;
+
+import javassist.bytecode.Descriptor.Iterator;
 
 @Controller
 public class AdminController {
 
-	
-	
-	@RequestMapping(value="/adminadd")
-	public ModelAndView show()
-	{System.out.println("show");
-		ModelAndView mv=new ModelAndView("adminadd");
-		return mv;
-	}
-	
 	@Autowired
 	SupplierDaoImpl supdaoImpl;
 	
-	@RequestMapping(value="/supplier")
-	public ModelAndView showSupplier()
-	{System.out.println("show");
-		ModelAndView mv=new ModelAndView("supplier");
+	@Autowired
+	CategoryDaoImpl categoryDaoImpl;
+	
+	@Autowired
+	ProductDaoImpl productDaoImpl;
+	
+	@RequestMapping(value="/adminadd")
+	public ModelAndView show()
+	{
+		ModelAndView mv=new ModelAndView("adminadd");
 		return mv;
+	}
+		
+	@RequestMapping(value="/supplier")
+	public String showSupplier()
+	{		
+		return "supplier";
 	}
 		
 	
 	@RequestMapping(value="/AddSupplier",method=RequestMethod.POST)
-	public ModelAndView addSupplier(@RequestParam("Sid") String sid,@RequestParam("supplierName") String supplierName)
-	{System.out.println("Data add");
-		ModelAndView mv=new ModelAndView("supplier","supplier",new Supplier());
-	 //	mv.addObject("supplier", new Supplier());
-			Supplier supp=new Supplier();
+	public ModelAndView addSupplier(@ModelAttribute("supplier") Supplier supplier,HttpServletRequest req)
+	{
+		System.out.println("supplier add");
+		ModelAndView mv=new ModelAndView("supplier");
+		String sid=req.getParameter("sid");
+		String supplierName=req.getParameter("supName");
+		Supplier supp=new Supplier();
 		supp.setSid(sid);
 		supp.setSupplierName(supplierName);
 		boolean res=supdaoImpl.insertSupp(supp);
+		if(res==true)
 		System.out.println("Data added");
-		
-		
 		return mv;
 	}
 	
 	@RequestMapping(value="/category")
-	public ModelAndView showCategory()
-	{System.out.println("show");
+	public String showCategory()
+	{
+		
+		return "category";
+	}
+	
+	@RequestMapping(value="/AddCategory",method=RequestMethod.POST)
+	public ModelAndView addCategory(@ModelAttribute("category") Category category,HttpServletRequest req,Model m)
+	{
+		System.out.println("category add");
 		ModelAndView mv=new ModelAndView("category");
+		String cid=req.getParameter("catId");
+		String cName=req.getParameter("catName");
+	 
+		Category cat=new Category();
+		cat.setCatId(cid);
+		cat.setCatName(cName);
+		boolean res=categoryDaoImpl.insertCategory(cat);
+		List<Category> l=categoryDaoImpl.retrieveCategory();
+		m.addAttribute("catList",l);
+		System.out.println("Category added");
+		if(res==true)
+		System.out.println("Category added");
 		return mv;
 	}
 	
+	@RequestMapping(value="/product")
+	public String showProduct(ModelMap m)
+	{
+		List<Category> l=categoryDaoImpl.retrieveCategory();
+		
+		for(Category cat:l)
+		{	
+			m.addAttribute("catList",cat.getCatId());
+		System.out.println("Category added"+cat.getCatId());
+		}
+		return "product";
+	}
+	
+	@RequestMapping(value="/AddProduct",method=RequestMethod.POST)
+	public ModelAndView addCategory(@ModelAttribute("product") Product product,HttpServletRequest req,Model m)
+	{
+		System.out.println("product add");
+		ModelAndView mv=new ModelAndView("product");
+		String prname=req.getParameter("pname");
+		String prdesc=req.getParameter("pdesc");
+		String prprice=req.getParameter("price");
+		String prstock=req.getParameter("stock");
+		Product prod=new Product();
+		prod.setPname(prname);
+		prod.setDesc(prdesc);
+		prod.setPrice(Float.parseFloat(prprice));
+		prod.setStock(Integer.parseInt(prstock));
+		boolean res=productDaoImpl.insertProd(prod);
+	/*	List<Category> l=categoryDaoImpl.retrieveCategory();
+		m.addAttribute("catList",l);
+		for(Category cat:l)
+		{	
+		System.out.println("Category added"+cat.getCatId());
+		}
+		if(res==true)
+		System.out.println("Category added");*/
+		return mv;
+	}
 }

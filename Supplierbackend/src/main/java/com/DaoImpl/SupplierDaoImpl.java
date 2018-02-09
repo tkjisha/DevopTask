@@ -14,7 +14,7 @@ import com.DAO.SupplierDao;
 import com.Model.Supplier;
 import com.Config.HibernateConfig;
 
-@Repository("supdao")
+@Repository("supdaoImpl")
 public class SupplierDaoImpl implements SupplierDao{
 
 	HibernateConfig hc;
