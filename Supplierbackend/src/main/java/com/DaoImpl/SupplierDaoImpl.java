@@ -84,5 +84,12 @@ public class SupplierDaoImpl implements SupplierDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public List<Supplier> retrieveSupplier() {
+		session.beginTransaction();
+		List<Supplier> supList=session.createQuery("from Supplier").list();
+		session.getTransaction().commit();
+		return supList;
+	}
 
 }

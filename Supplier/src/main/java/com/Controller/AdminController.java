@@ -1,5 +1,7 @@
 package com.Controller;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.DaoImpl.CategoryDaoImpl;
@@ -56,8 +59,8 @@ public class AdminController {
 	{
 		System.out.println("supplier add");
 		ModelAndView mv=new ModelAndView("supplier");
-		String sid=req.getParameter("sid");
-		String supplierName=req.getParameter("supName");
+		String sid=req.getParameter("sid");System.out.println(sid);
+		String supplierName=req.getParameter("supName");System.out.println(supplierName);
 		Supplier supp=new Supplier();
 		supp.setSid(sid);
 		supp.setSupplierName(supplierName);
@@ -98,17 +101,14 @@ public class AdminController {
 	public String showProduct(ModelMap m)
 	{
 		List<Category> l=categoryDaoImpl.retrieveCategory();
-		
-		for(Category cat:l)
-		{	
-			m.addAttribute("catList",cat.getCatId());
-		System.out.println("Category added"+cat.getCatId());
-		}
+		m.addAttribute("catList",l);
+		List<Supplier> l1=supdaoImpl.retrieveSupplier();
+		m.addAttribute("supList",l1);
 		return "product";
 	}
 	
 	@RequestMapping(value="/AddProduct",method=RequestMethod.POST)
-	public ModelAndView addCategory(@ModelAttribute("product") Product product,HttpServletRequest req,Model m)
+	public ModelAndView addProduct(HttpServletRequest req,@RequestParam("file")MultipartFile file)
 	{
 		System.out.println("product add");
 		ModelAndView mv=new ModelAndView("product");
@@ -121,15 +121,19 @@ public class AdminController {
 		prod.setDesc(prdesc);
 		prod.setPrice(Float.parseFloat(prprice));
 		prod.setStock(Integer.parseInt(prstock));
+		String filepath=req.getSession().getServletContext().getRealPath("/");
+		String filename=file.getOriginalFilename();
+		prod.setImgname(filename);
 		boolean res=productDaoImpl.insertProd(prod);
-	/*	List<Category> l=categoryDaoImpl.retrieveCategory();
-		m.addAttribute("catList",l);
-		for(Category cat:l)
-		{	
-		System.out.println("Category added"+cat.getCatId());
-		}
-		if(res==true)
-		System.out.println("Category added");*/
+	    try{
+	    	byte [] imagebyte=file.getBytes();
+	    	BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(filepath+"/resources/"+filename)); 
+	    	bos.write(imagebyte);
+	    	bos.close();
+	    }catch(Exception e)
+	    {
+	    	
+	    }
 		return mv;
 	}
 }

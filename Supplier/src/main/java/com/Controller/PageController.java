@@ -37,4 +37,8 @@ public class PageController {
 		userdaoImpl.insertUser(user);
 		return mv;
 	}
+	@RequestMapping(value="/login")
+	public String showLogin(){
+		return "login";
+	}
 }

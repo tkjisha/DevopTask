@@ -25,8 +25,11 @@
 	</tr>
 	
 	<tr>
-		<td colspan="2">
+		<td >
 			<center><input type="submit" value="Add"/></center>
+		</td>
+		<td >
+			<center><input type="reset" value="Cancel"/></center>
 		</td>
 	</tr>
 </table>

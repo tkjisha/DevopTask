@@ -22,10 +22,12 @@
 		<td>Supplier Name</td><td><input type="text" name="supName"/></td>		
 	</tr>
 	<tr>
-		<td col span="2">
+		<td >
 			<center><input type="submit" value="Add"/></center>
 		</td>
-		
+		<td >
+			<center><input type="reset" value="Cancel"/></center>
+		</td>
 	</tr>
 	
 	</table>

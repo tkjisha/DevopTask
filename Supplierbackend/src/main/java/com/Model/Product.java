@@ -35,6 +35,7 @@ public class Product {
 	
 	@Transient
 	MultipartFile pimage;
+	
 	private String imgname;
 	public int getPid() {
 		return pid;

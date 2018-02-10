@@ -31,15 +31,15 @@
 
 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Category<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-          <li><a href="#">Page 1-4</a></li>
-          <li><a href="#">Page 1-5</a></li>
+          <li><a href="#">cat1</a></li>
+          <li><a href="#">cat2</a></li>
+          <li><a href="#">cat3</a></li>
+          <li><a href="#">cat4</a></li>
+          <li><a href="#">cat5</a></li>
         </ul>
       </li>
       <li><a href="register">Register<i class="fa fa-registered" ></i></a></li>
-<li><a href="#">Login<i class="fa fa-sign-in"></i></a></li>
+<li><a href="login">Login<i class="fa fa-sign-in"></i></a></li>
 </ul>
 </div>
 </nav>
