@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+     <%@ page isELIgnored="false" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,17 +29,17 @@
     <div class="carousel-inner">
 
       <div class="item active">
-        <img src="img//car1.jpg" alt="sale" style="width:100%;">
+        <img src="${pageContext.request.contextPath}/resources/img/car1.jpg"  alt="sale" style="width:100%;">
         
       </div>
 
       <div class="item">
-        <img src="img//car2.jpg" alt="shop" style="width:100%;">
+        <img src="${pageContext.request.contextPath}/resources/img/car2.jpg"  alt="shop" style="width:100%;">
         
       </div>
     
       <div class="item">
-        <img src="img//car3.jpg" alt="shoppe" style="width:100%;">
+        <img src="${pageContext.request.contextPath}/resources/img/car3.jpg"  alt="shoppe" style="width:100%;">
         
       </div>
   

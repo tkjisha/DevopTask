@@ -11,7 +11,7 @@
 </head>
 <body>
 <jsp:include page="adminadd.jsp"></jsp:include>
-<form action="AddProduct"  method="POST">
+<form action="AddProduct"  method="POST" enctype="multipart/form-data">
 <table align="center" cellspacing="3" cellpadding="4">
 	<tr>
 		<td colspan="2">CATEGORY DETAILS</td>
@@ -57,7 +57,7 @@
 	</tr>
 	<tr>
 		<td>Product Image</td>		
-		<td><input type = "file" name = "file" size = "50" ></td>
+		<td><input type = "file" name = "pimage" size = "50" ></td>
 	</tr>
 	<tr>
 		<td >

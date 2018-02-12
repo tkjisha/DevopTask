@@ -108,7 +108,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/AddProduct",method=RequestMethod.POST)
-	public ModelAndView addProduct(HttpServletRequest req,@RequestParam("file")MultipartFile file)
+	public ModelAndView addProduct(HttpServletRequest req,@RequestParam("pimage")MultipartFile file)
 	{
 		System.out.println("product add");
 		ModelAndView mv=new ModelAndView("product");
@@ -116,7 +116,7 @@ public class AdminController {
 		String prdesc=req.getParameter("pdesc");
 		String prprice=req.getParameter("price");
 		String prstock=req.getParameter("stock");
-		Product prod=new Product();
+		Product prod=new Product();System.out.println(prod);
 		prod.setPname(prname);
 		prod.setDesc(prdesc);
 		prod.setPrice(Float.parseFloat(prprice));
