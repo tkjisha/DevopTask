@@ -7,16 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="login" method="post">
+<jsp:include page="header.jsp"></jsp:include>
+<form action="/login"">
 <table align="center" cellspacing="3" cellpadding="5">
 	<tr>
 		<td colspan="2">LOGIN</td>
 	</tr>
 	<tr>
-		<td>Email ID</td><td><input type="text" name="email"/></td>		
+		<td>Email ID</td><td><input type="text" name="username"/></td>		
 	</tr>
 	<tr>
-		<td>Password</td><td><input type="password" name="password"/></td>			
+		<td>Password</td><td><input type="password" name="pass"/></td>			
 	</tr>
 	<tr>
 		<td >

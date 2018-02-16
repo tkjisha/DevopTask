@@ -104,24 +104,30 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/AddProduct",method=RequestMethod.POST)
-	public ModelAndView addProduct(HttpServletRequest req,@RequestParam("pimage")MultipartFile file)
+	public ModelAndView addProduct(HttpServletRequest req,Model m)
 	{
 		System.out.println("product add");
 		ModelAndView mv=new ModelAndView("product");
-		String prname=req.getParameter("pname");
-		String prdesc=req.getParameter("pdesc");
-		String prprice=req.getParameter("price");
-		String prstock=req.getParameter("stock");
+		String prname=req.getParameter("pname");System.out.println(prname);
+		String prdesc=req.getParameter("desc");System.out.println(prdesc);
+		String prprice=req.getParameter("price");System.out.println(prprice);
+		String prstock=req.getParameter("stock");System.out.println(prstock);
+		String cat=req.getParameter("category.{catId}");System.out.println(cat);
+		String supp=req.getParameter("supid");System.out.println(supp);
+		String primg=req.getParameter("pimage");System.out.println(primg);
 		Product prod=new Product();System.out.println(prod);
 		prod.setPname(prname);
 		prod.setDesc(prdesc);
-		prod.setPrice(Float.parseFloat(prprice));
-		prod.setStock(Integer.parseInt(prstock));
+		prod.setPrice(Float.parseFloat(prprice));		
+		prod.setStock(2);
+	//	prod.setCatId(catId);
+	//	prod.setSid(suppid);
+		prod.setImgname(primg);
 		String filepath=req.getSession().getServletContext().getRealPath("/");
-		String filename=file.getOriginalFilename();
-		prod.setImgname(filename);
+	//	String filename=file.getOriginalFilename();
+	//	prod.setImgname(filename);
 		boolean res=productDaoImpl.insertProd(prod);
-	    try{
+	/*    try{
 	    	byte [] imagebyte=file.getBytes();
 	    	BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(filepath+"/resources/"+filename)); 
 	    	bos.write(imagebyte);
@@ -129,7 +135,7 @@ public class AdminController {
 	    }catch(Exception e)
 	    {
 	    	
-	    }
+	    } */
 		return mv;
 	}
 }

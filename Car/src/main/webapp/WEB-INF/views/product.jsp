@@ -11,10 +11,10 @@
 </head>
 <body>
 <jsp:include page="adminadd.jsp"></jsp:include>
-<form action="AddProduct"  method="POST" enctype="multipart/form-data">
+<form action="AddProduct"  method="POST" >
 <table align="center" cellspacing="3" cellpadding="4">
 	<tr>
-		<td colspan="2">CATEGORY DETAILS</td>
+		<td colspan="2">PRODUCT DETAILS</td>
 	</tr>
 	<tr>
 		<td>Product Name</td>		
@@ -22,7 +22,7 @@
 	</tr>
 	<tr>
 		<td>Product description</td>		
-		<td><input type="text" name="pdesc"/></td>
+		<td><input type="text" name="desc" /></td>
 	</tr>
 	<tr>
 		<td>Product price</td>		
@@ -39,7 +39,7 @@
 		<select name="category"/>
 		<option value="select">Select</option>
 	<c:forEach var="catid" items="${catList}">
-		<option value="${catid }">${catid.getCatId()}</option>
+		<option value="${catid.getCatId()}">${catid.getCatId()}</option>
 		</c:forEach>
 		</select>
 		</td>
@@ -47,7 +47,7 @@
 	<tr>
 		<td>Select Supplier</td>		
 		<td>
-		<select name="Supplier"/>
+		<select name="supplier"/>
 		<option value="select">Select</option>
 		<c:forEach var="supid" items="${supList}">
 		<option value="${supid }">${supid.getSid()}</option>
@@ -63,7 +63,7 @@
 		<td >
 			<center><input type="submit" value="Add"/></center>
 		</td>
-		<td >
+		<td>
 			<center><input type="reset" value="Cancel"/></center>
 		</td>
 	</tr>
