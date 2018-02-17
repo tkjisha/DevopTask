@@ -12,15 +12,14 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
-      <scope>test</scope>
+      <scope>runtime</scope>
     </dependency>
     
-    <dependency> 
-    <groupId>com</groupId>
+    <dependency>
+   <groupId>com</groupId>
   <artifactId>Supplierbackend</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  </dependency>
-  
+  <version>0.0.1-SNAPSHOT</version>  
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
 <dependency>
     <groupId>org.springframework</groupId>
@@ -49,6 +48,12 @@
     <version>4.3.10.RELEASE</version>
 </dependency>
     
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>4.3.10.RELEASE</version>
+</dependency>
     
    
    <dependency>
@@ -64,6 +69,14 @@
     <version>1.2</version>
     </dependency>
     
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-core</artifactId>
+    <version>4.2.3.RELEASE</version>
+</dependency>
+    
+    
     <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
 <dependency>
     <groupId>org.springframework.security</groupId>
@@ -76,6 +89,28 @@
     <groupId>org.springframework.security</groupId>
     <artifactId>spring-security-config</artifactId>
     <version>4.2.3.RELEASE</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-taglibs</artifactId>
+    <version>4.2.3.RELEASE</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-core</artifactId>
+    <version>2.5.1</version>
+</dependency>
+
+    
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aop</artifactId>
+    <version>4.3.10.RELEASE</version>
 </dependency>
     
   </dependencies>
