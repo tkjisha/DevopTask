@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,13 +37,19 @@ public class AdminController {
 	@Autowired
 	ProductDaoImpl productDaoImpl;
 	
+	
 	@RequestMapping(value="/adminadd")
 	public ModelAndView show()
 	{
-		ModelAndView mv=new ModelAndView("adminadd");
+		ModelAndView mv=new ModelAndView("supplier");
 		return mv;
 	}
 		
+	@RequestMapping(value="/AdminProductList")
+	public String showAdminProd(){
+		
+		return "AdminProductList";
+	}
 	@RequestMapping(value="/supplier")
 	public String showSupplier()
 	{		
@@ -87,7 +94,7 @@ public class AdminController {
 		boolean res=categoryDaoImpl.insertCategory(cat);
 		List<Category> l=categoryDaoImpl.retrieveCategory();
 		m.addAttribute("catList",l);
-		System.out.println("Category added");
+		
 		if(res==true)
 		System.out.println("Category added");
 		return mv;
@@ -96,6 +103,7 @@ public class AdminController {
 	@RequestMapping(value="/product")
 	public String showProduct(ModelMap m)
 	{
+		
 		List<Category> l=categoryDaoImpl.retrieveCategory();
 		m.addAttribute("catList",l);
 		List<Supplier> l1=supdaoImpl.retrieveSupplier();
@@ -104,7 +112,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/AddProduct",method=RequestMethod.POST)
-	public ModelAndView addProduct(HttpServletRequest req,Model m)
+	public ModelAndView addProduct(@RequestParam("pimage") MultipartFile file,HttpServletRequest req, Model m)
 	{
 		System.out.println("product add");
 		ModelAndView mv=new ModelAndView("product");
@@ -112,30 +120,41 @@ public class AdminController {
 		String prdesc=req.getParameter("desc");System.out.println(prdesc);
 		String prprice=req.getParameter("price");System.out.println(prprice);
 		String prstock=req.getParameter("stock");System.out.println(prstock);
-		String cat=req.getParameter("category.{catId}");System.out.println(cat);
-		String supp=req.getParameter("supid");System.out.println(supp);
+		String cat=req.getParameter("category");System.out.println(cat);
+		String supp=req.getParameter("supplier");System.out.println(supp);
 		String primg=req.getParameter("pimage");System.out.println(primg);
 		Product prod=new Product();System.out.println(prod);
 		prod.setPname(prname);
 		prod.setDesc(prdesc);
 		prod.setPrice(Float.parseFloat(prprice));		
-		prod.setStock(2);
-	//	prod.setCatId(catId);
-	//	prod.setSid(suppid);
+		prod.setStock(Integer.parseInt(prstock));
+		prod.setCatid(cat);
+		prod.setSid(supp);
 		prod.setImgname(primg);
-		String filepath=req.getSession().getServletContext().getRealPath("/");
-	//	String filename=file.getOriginalFilename();
-	//	prod.setImgname(filename);
+		String filepath=req.getSession().getServletContext().getRealPath("/");System.out.println(filepath);
+		String filename=file.getOriginalFilename();System.out.println(filename);
+		prod.setImgname(filename);
 		boolean res=productDaoImpl.insertProd(prod);
-	/*    try{
+		System.out.println(res);
+	   try{
 	    	byte [] imagebyte=file.getBytes();
 	    	BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(filepath+"/resources/"+filename)); 
 	    	bos.write(imagebyte);
 	    	bos.close();
 	    }catch(Exception e)
 	    {
-	    	
-	    } */
+	    	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+	    } 
 		return mv;
+	}
+	@RequestMapping(value="/userlogged")
+	public void userlogged()
+	{
+		
+	}
+	@RequestMapping(value="/error")
+	public void error()
+	{
+		
 	}
 }

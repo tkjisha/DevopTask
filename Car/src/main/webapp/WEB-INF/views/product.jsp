@@ -11,8 +11,8 @@
 </head>
 <body>
 <jsp:include page="adminadd.jsp"></jsp:include>
-<form action="AddProduct"  method="POST" >
-<table align="center" cellspacing="3" cellpadding="4">
+<form action="AddProduct"  method="POST" enctype="multipart/form-data">
+<table align="center" cellspacing="5" cellpadding="5">
 	<tr>
 		<td colspan="2">PRODUCT DETAILS</td>
 	</tr>
@@ -50,21 +50,22 @@
 		<select name="supplier"/>
 		<option value="select">Select</option>
 		<c:forEach var="supid" items="${supList}">
-		<option value="${supid }">${supid.getSid()}</option>
+		<option value="${supid.getSid()}">${supid.getSid()}</option>
 		</c:forEach>
 		</select>
 		</td>
 	</tr>
 	<tr>
 		<td>Product Image</td>		
-		<td><input type = "file" name = "pimage" size = "50" ></td>
+		<td><input type = "file" name = "pimage"  size = "50" ></td>
 	</tr>
 	<tr>
 		<td >
-			<center><input type="submit" value="Add"/></center>
+			
 		</td>
 		<td>
-			<center><input type="reset" value="Cancel"/></center>
+		    <input type="submit" value="Add"/>
+			<input type="reset" value="Cancel"/>
 		</td>
 	</tr>
 </table>

@@ -27,17 +27,17 @@
     <div class="carousel-inner">
 
       <div class="item active">
-        <img src="${pageContext.request.contextPath}/resources/img/car1.jpg"  alt="sale" style="width:100%;">
+        <img src="${pageContext.request.contextPath}/resources/img/car1.jpg"  alt="car1" style="width:100%;">
         
       </div>
 
       <div class="item">
-        <img src="${pageContext.request.contextPath}/resources/img/car2.jpg"  alt="shop" style="width:100%;">
+        <img src="${pageContext.request.contextPath}/resources/img/car2.jpg"  alt="car2" style="width:100%;">
         
       </div>
     
       <div class="item">
-        <img src="${pageContext.request.contextPath}/resources/img/car3.jpg"  alt="shoppe" style="width:100%;">
+        <img src="${pageContext.request.contextPath}/resources/img/car3.jpg"  alt="car3" style="width:100%;">
         
       </div>
   

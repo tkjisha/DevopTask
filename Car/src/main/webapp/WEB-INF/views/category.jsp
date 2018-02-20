@@ -26,10 +26,10 @@
 	
 	<tr>
 		<td >
-			<center><input type="submit" value="Add"/></center>
+			
 		</td>
 		<td >
-			<center><input type="reset" value="Cancel"/></center>
+			<input type="submit" value="Add"/><input type="reset" value="Cancel"/>
 		</td>
 	</tr>
 </table>

@@ -29,8 +29,8 @@
 <ul class="nav navbar-nav" >
 <li><a href="#">Home<i class="fa fa-home"></i></a></li>
 <li><a href="adminadd">Admin</a></li>
-
-<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Category<span class="caret"></span></a>
+<li><a href="AdminProductList">AdminList</a>
+<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">ProductList<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="#">cat1</a></li>
           <li><a href="#">cat2</a></li>

@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 <form:form action="AddUser" modelAttribute="user">
 <table align="center" cellspacing="2">
 	<tr>
