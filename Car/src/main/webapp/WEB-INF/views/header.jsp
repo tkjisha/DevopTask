@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page isELIgnored="false" %>
+    <%@page import="com.Model.Category" %> 
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +13,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <title></title>
+
+
+
 </head>
 <body>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
@@ -30,14 +36,14 @@
 <li><a href="#">Home<i class="fa fa-home"></i></a></li>
 <li><a href="adminadd">Admin</a></li>
 <li><a href="AdminProductList">AdminList</a>
-<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">ProductList<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">cat1</a></li>
-          <li><a href="#">cat2</a></li>
-          <li><a href="#">cat3</a></li>
-          <li><a href="#">cat4</a></li>
-          <li><a href="#">cat5</a></li>
-        </ul>
+<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="">ProductList<span class="caret"></span></a>
+         <ul class="dropdown-menu" >
+         <c:forEach var="catid" items="${catList}">
+		
+          <li><a href="ProductList?id=${catid.getCatId()}">${catid.getCatName()}</a></li>
+          </c:forEach>
+           
+        </ul>   
       </li>
       <li><a href="register">Register<i class="fa fa-registered" ></i></a></li>
 <li><a href="login">Login<i class="fa fa-sign-in"></i></a></li>

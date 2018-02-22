@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,10 +47,31 @@ public class AdminController {
 	}
 		
 	@RequestMapping(value="/AdminProductList")
-	public String showAdminProd(){
-		
-		return "AdminProductList";
+	public ModelAndView showAdminProd(){
+		ModelAndView mv=new ModelAndView("AdminProductList");
+		List<Product> lp=productDaoImpl.retrieveProduct();
+		mv.addObject("plist", lp);
+		return mv;
 	}
+	
+	@RequestMapping(value="/ProductList",method=RequestMethod.GET)
+	public String showprodlist(HttpServletRequest req,ModelMap m)
+	{
+	String c=req.getParameter("id");
+		List<Product> lp=productDaoImpl.getProdByCid(c);
+		m.addAttribute("prodlist", lp);
+		return "ProductList";
+	}
+	
+	@RequestMapping(value="/ProductDetails",method=RequestMethod.POST)
+	public ModelAndView prodDetail(HttpServletRequest req){
+		int pid=Integer.parseInt(req.getParameter("pid"));System.out.println(pid);
+		ModelAndView mv=new ModelAndView("ProductDetails");
+		Product p=productDaoImpl.findById(pid);
+		mv.addObject("prod",p);
+		return mv;
+	}
+	
 	@RequestMapping(value="/supplier")
 	public String showSupplier()
 	{		
@@ -75,8 +97,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/category")
 	public String showCategory()
-	{
-		
+	{		
 		return "category";
 	}
 	
@@ -100,7 +121,7 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/product")
+	@RequestMapping(value="/product" ,method=RequestMethod.GET)
 	public String showProduct(ModelMap m)
 	{
 		
@@ -110,20 +131,45 @@ public class AdminController {
 		m.addAttribute("supList",l1);
 		return "product";
 	}
+	@RequestMapping(value="/product" ,method=RequestMethod.POST)
+	public String showProduct(HttpServletRequest req,ModelMap m)
+	{
+		int pid=Integer.parseInt(req.getParameter("id"));
+		System.out.println(pid);
+		Product p=productDaoImpl.findById(pid); 
+		m.addAttribute("prod", p);
+		return "product";
+	}
+	
+	@RequestMapping(value="/Delprod/{pid}",method=RequestMethod.POST)
+	public String delproduct(@PathVariable("pid") int pid)
+	{
+		System.out.println("del"+pid);
+		productDaoImpl.deleteProd(pid);
+		return "redirect:/AdminProductList";
+	}
+	
+	@RequestMapping(value="/Updateprod/{prod}",method=RequestMethod.POST)
+	public String updateProd(@PathVariable("prod") Product prod)
+	{
+		System.out.println("updt");
+		productDaoImpl.updateProd(prod);
+		return "redirect:/AdminProductList";
+	}
 	
 	@RequestMapping(value="/AddProduct",method=RequestMethod.POST)
 	public ModelAndView addProduct(@RequestParam("pimage") MultipartFile file,HttpServletRequest req, Model m)
 	{
 		System.out.println("product add");
 		ModelAndView mv=new ModelAndView("product");
-		String prname=req.getParameter("pname");System.out.println(prname);
-		String prdesc=req.getParameter("desc");System.out.println(prdesc);
-		String prprice=req.getParameter("price");System.out.println(prprice);
-		String prstock=req.getParameter("stock");System.out.println(prstock);
-		String cat=req.getParameter("category");System.out.println(cat);
-		String supp=req.getParameter("supplier");System.out.println(supp);
-		String primg=req.getParameter("pimage");System.out.println(primg);
-		Product prod=new Product();System.out.println(prod);
+		String prname=req.getParameter("pname");
+		String prdesc=req.getParameter("desc");
+		String prprice=req.getParameter("price");
+		String prstock=req.getParameter("stock");
+		String cat=req.getParameter("category");
+		String supp=req.getParameter("supplier");
+		String primg=req.getParameter("pimage");
+		Product prod=new Product();
 		prod.setPname(prname);
 		prod.setDesc(prdesc);
 		prod.setPrice(Float.parseFloat(prprice));		
@@ -147,14 +193,31 @@ public class AdminController {
 	    } 
 		return mv;
 	}
+	
+	
+	@RequestMapping(value="/login", method = RequestMethod.GET)
+	 public String login(ModelMap model) {
+	 
+	  return "login";
+	 
+	 }
 	@RequestMapping(value="/userlogged")
 	public void userlogged()
 	{
 		
 	}
-	@RequestMapping(value="/error")
-	public void error()
+	 @RequestMapping(value="/error", method = RequestMethod.GET)
+	public String error(ModelMap m)
 	{
+		m.addAttribute("error", "true");
+		 return "login";
 		
 	}
+	 
+	 @RequestMapping(value="/logout", method = RequestMethod.GET)
+	 public String logout(ModelMap model) {
+	 
+	  return "login";
+	 
+	 }
 }

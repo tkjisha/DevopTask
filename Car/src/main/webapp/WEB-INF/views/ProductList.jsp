@@ -10,43 +10,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
-<center>PRODUCT LIST</center>
+<p><center>PRODUCT LIST</center></p>
 <form action="" method="post">
 <table border="1" cellspacing="0" width="100%">
 <tr>
-	<th width="10px">
-		S.No
-	</th>
-	<th  width="10px">
-		PID
-	</th>
-	<th width="40px">
-		Name
-	</th>
-	<th width="40px ">
-		Supplier
-	</th>
-	<th width="40px">
-		Category
-	</th>
-	<th width="20">
-		Price
-	</th>
-	<th width="20">
-		Stock
-	</th>
-	<th width="50">
-		Description
-	</th>
-	<th width="40">
-		Image
-	</th>
-	<th width="50">
-		Action
-	</th>
+	<th>SNo</th>
+	<th>PID</th>
+	<th>NAME</th>
+	<th>SUPPLIER</th>
+	<th>CATEGORY</th>
+	<th>PRICE</th>
+	<th>STOCK</th>
+	<th>DESCRIPTION</th>
+	<th>IMAGE</th>	
+	<th>ACTION</th>
+	
 </tr>
-  <c:forEach var="pr" items="${plist}" varStatus="counter">
+
+<c:forEach var="pr" items="${prodlist}" varStatus="counter">
 <tr>
 	<td>${counter.count}</td>
 	<td>${pr.getPid()}</td>
@@ -55,12 +36,13 @@
 	<td>${pr.getCategory().getCatName()}</td>
 	<td>${pr.getPrice()}</td>
 	<td>${pr.getStock()}</td>
-	<td>${pr.getDesc()}</td>
-	<td></td>
-	<td><input type="submit" value="EDIT" formaction="product?id=${pr.getPid()}"/>
-	<input type="submit" value="DELETE" formaction="Delprod/${pr.getPid()}"/></td>
-</tr>
-</c:forEach>
+	<td>${pr.getDesc()}<input type="hidden" name="cid" value="${pr.getCategory().getCatId()}"/></td>
+	<td><img src="${pageContext.request.contextPath}/resources/${prod.getImgname()}" height="150" width="200"/> </td>
+	
+	<td><input type="submit" value="Details" formaction="ProductDetails?pid=${pr.getPid()}"/></td>
+	</tr>
+	</c:forEach>
+
 </table>
 </form>
 </body>
