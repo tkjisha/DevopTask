@@ -11,26 +11,29 @@
 </head>
 <body>
 <p>PRODUCT DETAILS</p><BR><BR><BR><BR>
-<img src="${pageContext.request.contextPath}/resources/${prod.getImgname()}" height="250" width="300" align="center"/>
-<table align="left">
+<form action="" method="post">
+<img src="${pageContext.request.contextPath}/resources/${prod.getImgname()}" height="250" width="300" align="left"/>
+<table align="center">
 	<tr>
 	
-	<td>Product Name </td><td><input type="text" value="${prod.getPname()}"/></td>
+	<td><b>${prod.getPname()}<b></b></td><td></td>
 	</tr>
 	<tr>
-	<td>Supplier </td><td><input type="text" value="${prod.getSupplier().getSupplierName()}"/></td>
+	<td><b>${prod.getSupplier().getSupplierName()}</b></td><td> </td>
 	</tr>
 	<tr>
-	<td>Price </td><td><input type="text" value="${prod.getPrice()}"/></td>
+	<td><b>${prod.getPrice()}</b></td><td> </td>
 	</tr>
 	<tr>
-	<td>Quantity </td><td><input type="text" value="${prod.getStock()}"/></td>
+	<td><b>Quantity </b></td><td><input type="text" name="pqty" value=""/></td>
 	</tr>
 	<tr>
-	<td>product Description</td><td><input type="text" value="${prod.getDesc()}"/></td>
+	<td><b>${prod.getDesc()}</b></td><td></td>
 	</tr>
+	<tr><td><input type="submit" value="Add To Cart" formaction="Cart/${prod.getPid()}"/></td></tr>
 </table>
 
 
+</form>
 </body>
 </html>

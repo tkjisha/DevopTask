@@ -10,7 +10,7 @@
 </head>
 <body>
 <jsp:include page="adminadd.jsp"></jsp:include>
-<form action="AddSupplier" method="post">
+<form action="admin/AddSupplier" method="post">
 <table align="center" cellspacing="3" cellpadding="4">
 	<tr>
 		<td colspan="2">SUPPLIER DETAILS</td>

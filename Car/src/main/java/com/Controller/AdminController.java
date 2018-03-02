@@ -2,20 +2,26 @@ package com.Controller;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +31,7 @@ import com.DaoImpl.SupplierDaoImpl;
 import com.Model.Category;
 import com.Model.Product;
 import com.Model.Supplier;
+import com.Model.User;
 
 @Controller
 public class AdminController {
@@ -79,7 +86,7 @@ public class AdminController {
 	}
 		
 	
-	@RequestMapping(value="/AddSupplier",method=RequestMethod.POST)
+	@RequestMapping(value="/admin/AddSupplier",method=RequestMethod.POST)
 	public ModelAndView addSupplier(@ModelAttribute("supplier") Supplier supplier,HttpServletRequest req)
 	{
 		System.out.println("supplier add");
@@ -149,15 +156,18 @@ public class AdminController {
 		return "redirect:/AdminProductList";
 	}
 	
-	@RequestMapping(value="/Updateprod/{prod}",method=RequestMethod.POST)
-	public String updateProd(@PathVariable("prod") Product prod)
+	@RequestMapping(value="/Updateprod/{pid}",method=RequestMethod.POST)
+	public String updateProd(@PathVariable("pid")int pid,HttpServletRequest req)
 	{
-		System.out.println("updt");
-		productDaoImpl.updateProd(prod);
+		System.out.println("updt"+pid);
+		Product p=productDaoImpl.findById(pid);
+		p.setPrice(Float.parseFloat(req.getParameter("price")));
+		p.setStock(Integer.parseInt(req.getParameter("stock")));
+		productDaoImpl.updateProd(p);System.out.println(p);
 		return "redirect:/AdminProductList";
 	}
 	
-	@RequestMapping(value="/AddProduct",method=RequestMethod.POST)
+	@RequestMapping(value="/admin/AddProduct",method=RequestMethod.POST)
 	public ModelAndView addProduct(@RequestParam("pimage") MultipartFile file,HttpServletRequest req, Model m)
 	{
 		System.out.println("product add");
@@ -194,24 +204,36 @@ public class AdminController {
 		return mv;
 	}
 	
-	
-	@RequestMapping(value="/login", method = RequestMethod.GET)
-	 public String login(ModelMap model) {
-	 
+/*	@RequestMapping(value="/Cart/{pid}", method = RequestMethod.POST)
+	public ModelAndView showCart(@PathVariable("pid") int pid)
+	{
+		System.out.println("cart"+pid);
+		Product p=productDaoImpl.findById(pid);
+		ModelAndView mv=new ModelAndView("Cart");
+		mv.addObject("prod",p);
+		return mv;
+	}*/
+	@RequestMapping(value="/login", method =RequestMethod.GET)
+	 public String login(ModelMap model,HttpServletRequest req) {
+		System.out.println("login");
+		
 	  return "login";
 	 
 	 }
-	@RequestMapping(value="/userlogged")
-	public void userlogged()
-	{
-		
+	@RequestMapping(value="/userlogged",method =RequestMethod.POST)	
+	public String userlogged(HttpServletRequest req,Principal pr)
+	{System.out.println("userlogin");
+		Principal p=req.getUserPrincipal();System.out.println("userlogin"+p);
+		Principal prl =(Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	//	String pname = authentication.getName();
+		System.out.println("userlogin"+prl);
+		return "index";
 	}
-	 @RequestMapping(value="/error", method = RequestMethod.GET)
-	public String error(ModelMap m)
-	{
-		m.addAttribute("error", "true");
-		 return "login";
-		
+	@RequestMapping(value="/error")	 
+	public String error()
+	{System.out.println("error");
+	
+		return "login";
 	}
 	 
 	 @RequestMapping(value="/logout", method = RequestMethod.GET)

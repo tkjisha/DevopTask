@@ -66,8 +66,13 @@
 		</td>
 	</tr>
 	<tr>
-		<td>Product Image</td>		
+		<td>Product Image</td>	
+		<c:if test="${empty prod}">	
 		<td><input type = "file" name = "pimage"  size = "50" ></td>
+		</c:if>
+		<c:if test="${not empty prod}">
+		<td><input type = "input" name = "pimage"  value="${prod.getImgname()}" size = "50" ></td>
+		</c:if>
 	</tr>
 	<tr>
 		<td >
@@ -81,7 +86,7 @@
 		</c:if>
 		<c:if test="${not empty prod}">
 		<td colspan="2">
-		<input type="submit" value="Update" formaction="Updateprod/{prod}"/>
+		<input type="submit" value="Update" formaction="Updateprod/${prod.getPid()}"/>
 		</td>
 		</c:if>
 	</tr>

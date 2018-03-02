@@ -36,7 +36,7 @@ li a:hover {
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 <ul>
-   <li><a href="supplier" >Supplier</a></li>
+   <li><a href="supplier" >Supplier </a></li>
    <li><a href="category" >Category</a></li>
   <li><a href="product" >Product</a></li>
    </ul>
